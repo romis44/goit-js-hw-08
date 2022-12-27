@@ -7,19 +7,14 @@ const STORAGE_KEY = 'feedback-form-state';
 const formData = {};
 
 form.addEventListener('submit', onFormSubmit);
-emailInput.addEventListener('input', throttle(onFormInput, 500));
-messageInput.addEventListener('input', throttle(onFormInput, 500));
+form.addEventListener('input', throttle(onFormInput, 500));
 
 populateTextarea();
 
-form.addEventListener('input', evt => {
-  formData[evt.target.name] = evt.target.value;
-  console.log(formData);
-});
-
 function onFormInput(evt) {
-  // const message = evt.target.value;
+  formData[evt.target.name] = evt.target.value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+  console.log(formData);
 }
 
 function onFormSubmit(evt) {
